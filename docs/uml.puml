@@ -1,0 +1,91 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+
+package "com.questforge.model" {
+    class Quest {
+        - title : String
+        - description : String
+        - type : QuestType
+        - objectives : List<String>
+        - rewards : List<Reward>
+        - requiredLevel : int
+        - location : String
+        - timeLimitMinutes : int
+        - repeatable : boolean
+        + getters()
+        + toString() : String
+    }
+    enum QuestType {
+        MAIN
+        SIDE
+        DAILY
+    }
+    class Reward {
+        - name : String
+        - amount : int
+        + getName() : String
+        + getAmount() : int
+    }
+}
+
+package "com.questforge.builder" {
+    interface QuestBuilder {
+        + setTitle(String) : QuestBuilder
+        + setDescription(String) : QuestBuilder
+        + setLocation(String) : QuestBuilder
+        + setRequiredLevel(int) : QuestBuilder
+        + setTimeLimitMinutes(int) : QuestBuilder
+        + addObjective(String) : QuestBuilder
+        + addReward(Reward) : QuestBuilder
+        + setRepeatable(boolean) : QuestBuilder
+        + build() : Quest
+    }
+    abstract class AbstractQuestBuilder {
+        # title : String
+        # description : String
+        # location : String
+        # requiredLevel : int
+        # timeLimitMinutes : int
+        # repeatable : boolean
+        # objectives : List<String>
+        # rewards : List<Reward>
+        + build() : Quest
+        # getQuestType() : QuestType
+        # validateSpecificState()
+    }
+    class MainQuestBuilder
+    class SideQuestBuilder
+    class DailyQuestBuilder
+}
+
+package "com.questforge.director" {
+    class QuestDirector {
+        - builder : QuestBuilder
+        + constructTutorialQuest() : Quest
+        + constructHerbGatheringQuest() : Quest
+        + constructWolfHuntDailyQuest() : Quest
+    }
+}
+
+package "com.questforge.exception" {
+    class InvalidQuestException
+}
+
+class Main
+
+QuestBuilder <|.. AbstractQuestBuilder
+AbstractQuestBuilder <|-- MainQuestBuilder
+AbstractQuestBuilder <|-- SideQuestBuilder
+AbstractQuestBuilder <|-- DailyQuestBuilder
+
+QuestBuilder --> Quest : <<creates>>
+QuestDirector --> QuestBuilder : uses
+Quest --> QuestType
+Quest --> Reward
+AbstractQuestBuilder ..> InvalidQuestException
+Main ..> QuestDirector
+Main ..> QuestBuilder
+Main ..> Quest
+
+@enduml
