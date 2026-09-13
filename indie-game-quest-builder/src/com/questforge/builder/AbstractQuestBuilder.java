@@ -35,6 +35,15 @@ public abstract class AbstractQuestBuilder implements QuestBuilder {
     }
 
     @Override
+    public QuestBuilder setRequiredLevel(int level) {
+        if (level < 0) {
+            throw new IllegalArgumentException("Required level cannot be negative");
+        }
+        this.requiredLevel = level;
+        return this;
+    }
+
+    @Override
     public QuestBuilder setTimeLimitMinutes(int minutes){
         if(minutes < 0){
             throw new IllegalArgumentException("Time limit can not be negative");
