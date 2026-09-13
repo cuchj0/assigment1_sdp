@@ -53,6 +53,10 @@ public final class Quest {
         sb.append("Min. level  : ").append(requiredLevel).append("\n");
         sb.append("Time limit  : ").append(timeLimitMinutes == 0 ? "none" : timeLimitMinutes + " min").append("\n");
         sb.append("Repeatable  : ").append(repeatable).append("\n");
+        sb.append("Rewards     :\n");
+        for (Reward r : rewards) {
+            sb.append("  - ").append(r).append("\n");
+        }
         sb.append("Objectives  :\n");
         for (String obj : objectives){
             sb.append("  - ").append(obj).append("\n");
