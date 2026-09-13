@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/assigment1_sdp.iml" filepath="$PROJECT_DIR$/.idea/assigment1_sdp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/indie-game-quest-builder/indie-game-quest-builder.iml" filepath="$PROJECT_DIR$/indie-game-quest-builder/indie-game-quest-builder.iml" />
+    </modules>
+  </component>
+</project>
